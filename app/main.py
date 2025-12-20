@@ -38,7 +38,7 @@ async def chat_stream(request: Request):
 
     body = await request.json()
     user_msg = body.get("message")
-:
+
     bot.add_user_message(user_msg)
 
     # STREAM = TRUE
