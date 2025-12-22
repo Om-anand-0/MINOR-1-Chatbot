@@ -6,6 +6,10 @@ from app.models import ChatRequest, ChatResponse
 from fastapi.middleware.cors import CORSMiddleware
 import json
 import requests
+import os
+from fastapi import UploadFile, File
+from fastapi.responses import JSONResponse
+import shutil
 
 app = FastAPI()
 
@@ -80,6 +84,41 @@ def reset():
     bot.reset()
     return {"status": "chat memory cleared !"}
 
+# ------------------------------
+#  UPLOAD MEDICAL DOCUMENT (RAG)
+# ------------------------------
+@app.post("/upload")
+def upload_medical_file(file: UploadFile = File(...)):
+
+    ALLOWED_EXTENSIONS = (".pdf", ".txt")
+    KB_DIR = "kb"
+
+    if not file.filename.lower().endswith(ALLOWED_EXTENSIONS):
+        return JSONResponse(
+            status_code=400,
+            content={"error": "Only PDF or TXT files are supported"}
+        )
+
+    os.makedirs(KB_DIR, exist_ok=True)
+    file_path = os.path.join(KB_DIR, file.filename)
+
+    with open(file_path, "wb") as buffer:
+        shutil.copyfileobj(file.file, buffer)
+
+    try:
+        from app.rag_ingest import ingest_file
+        ingest_file(file_path)
+    except Exception as e:
+        return JSONResponse(
+            status_code=500,
+            content={"error": f"Ingestion failed: {str(e)}"}
+        )
+
+    return {
+        "status": "success",
+        "filename": file.filename,
+        "message": "Medical document indexed and ready for RAG"
+    }
 
 # ------------------------------
 #  ENTRY POINT

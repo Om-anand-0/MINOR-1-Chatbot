@@ -1,0 +1,38 @@
+CITY GENERAL HOSPITAL
+Dr. A. K. Sharma, MD (Internal Medicine) Reg No: 12345-MP
+
+Patient Name: Om Sharma Age/Sex: 21 / M Date: December 21, 2025
+
+Diagnosis: Acute Viral Pharyngitis (Sample Data)
+
+Rx:
+
+Tab. Amoxicillin 500mg
+
+Dosage: 1 tablet
+
+Frequency: 3 times a day (After meals)
+
+Duration: 5 Days
+
+Syp. Benadryl (Cough Formula)
+
+Dosage: 10ml
+
+Frequency: Twice daily (Morning/Night)
+
+Duration: 3 Days
+
+Tab. Paracetamol 650mg
+
+Dosage: 1 tablet
+
+Frequency: SOS (Only if fever > 100°F)
+
+Instructions:
+
+Drink plenty of warm fluids.
+
+Avoid cold beverages.
+
+Follow up if symptoms persist after 3 days.
